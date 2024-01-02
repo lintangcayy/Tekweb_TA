@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add SweetAlert2 library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <title>Kontak Pengaduan - The Joglo's Restaurant</title>
+</head>
+
+<body>
+    <header>
+        <h1>Kontak Pengaduan</h1>
+        <p>Silakan sampaikan pengaduan Anda melalui formulir di bawah ini.</p>
+    </header>
+
+    <nav>
+        <a href="index.html" class="nav-item">Profile</a>
+        <a href="menu.html" class="nav-item">Menu</a>
+        <a href="kontak.html" class="nav-item active">Kontak</a>
+    </nav>
+
+    <main>
+        <section id="complaint-form">
+            <h2>Formulir Pengaduan</h2>
+            <div id="complaintContainer">
+                <form class="complaintForm" action="submit_complaint.php" method="post" id="complaintForm">
+                    <label for="name">Nama:</label>
+                    <input type="text" name="name" required><br>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" required><br><br>
+                    <label for="complaint">Pengaduan:</label><br>
+                    <textarea name="complaint" rows="4" required></textarea><br>
+                    <button type="button" onclick="submitForm()" aria-label="Kirim Pengaduan">Kirim Pengaduan</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 The Joglo Restaurant. All rights reserved.</p>
+
+        <section id="contact">
+            <h2>Hubungi Kami</h2>
+            <p>Jl. Raya No. 123, Kota Elegan</p>
+            <p>Email: info@restoranjoglo.com</p>
+            <p>Telepon: (123) 456-7890</p>
+        </section>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        function submitForm() {
+            // Logic for submitting the form to the server
+            // Assume the form submission is successful
+            Swal.fire({
+                title: 'Pengaduan Terkirim!',
+                text: 'Terima kasih atas pengaduan Anda. Kami akan segera menindaklanjuti.',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Optional: Add additional logic here if needed
+                }
+
+                // Reset the form or perform other actions after submission
+                document.getElementById("complaintForm").reset();
+            });
+        }
+    </script>
+</body>
+
+</html>

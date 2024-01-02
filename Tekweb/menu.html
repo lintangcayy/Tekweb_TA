@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet">
+    <title>Restoran Joglo</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Style Dasar */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: burlywood;
+        }
+
+        header,
+        nav,
+        main,
+        footer {
+            margin: 20px;
+            background-color: whitesmoke;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation Styles */
+        nav {
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-item.active {
+            color: #ff6600;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 20px;
+        }
+
+        #contact {
+            text-align: center;
+        }
+
+        /* Footer Styles */
+        footer {
+            padding: 10px;
+            text-align: center;
+            color: #777;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Styles untuk Menu Item */
+        .menu-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Styles untuk Cart */
+        #cart-section {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        #cart-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity {
+            margin: 0 10px;
+        }
+
+        /* Styles untuk Tombol "Tambahkan ke Keranjang" */
+        .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #45a049;
+        }
+
+        /* Styles untuk Tombol "-" dan "+" */
+        .subtract-button,
+        .add-button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        /* Gaya untuk menyembunyikan tombol checkout setelah diklik */
+        #checkout-link.checkout-clicked {
+            pointer-events: none;
+        }
+
+        /* Styles untuk Tombol "Checkout" */
+        #checkout {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #checkout:hover {
+            background-color: #45a049;
+        }
+
+        /* Gaya untuk menyembunyikan tombol checkout setelah diklik */
+        #checkout-link.checkout-clicked {
+            pointer-events: none;
+        }
+
+        /* Gaya untuk tombol checkout dengan warna hijau */
+        #checkout.green {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Menu Makanan</h1>
+        <p>Restoran Joglo selalu menyajikan makanan dengan kualitas yang terjamin dan tentunya dengan rasa yang lezat</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Profile</a>
+        <a class="nav-item active" href="menu.html">Menu</a>
+        <a href="kontak.html">Kontak</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Makanan</h2>
+            <div class="menu-item" data-id="1" data-name="Ayam Goreng" data-price="25000">
+                <img src="IMG/IMG_AyamGoreng.jpg" alt="Ayam Goreng">
+                <h3>Ayam Goreng</h3>
+                <p>Rp 25.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+            <div class="menu-item" data-id="2" data-name="Magelangan" data-price="20000">
+                <img src="IMG/IMG_Magelangan.jpg" alt="Magelangan">
+                <h3>Magelangan</h3>
+                <p>Rp 20.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+            <!-- Tambahkan item-menu lainnya -->
+        </section>
+        <section>
+            <h2>Minuman</h2>
+            <div class="menu-item" data-id="3" data-name="Es Teh" data-price="5000">
+                <img src="IMG/IMG_EsTeh.jpg" alt="Es Teh">
+                <h3>Es Teh</h3>
+                <p>Rp 5.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+            <div class="menu-item" data-id="4" data-name="Es Jeruk" data-price="7000">
+                <img src="IMG/IMG_EsJeruk.jpg" alt="Es Jeruk">
+                <h3>Es Jeruk</h3>
+                <p>Rp 7.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+            <!-- Tambahkan item-menu lainnya -->
+        </section>
+        <section>
+            <h2>Camilan</h2>
+            <div class="menu-item" data-id="5" data-name="Kentang Goreng" data-price="15000">
+                <img src="IMG/IMG_KentangGoreng.jpg" alt="Kentang Goreng">
+                <h3>Kentang Goreng</h3>
+                <p>Rp 15.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+            <div class="menu-item" data-id="6" data-name="Mendoan" data-price="10000">
+                <img src="IMG/IMG_Mendoan.jpg" alt="Mendoan">
+                <h3>Mendoan</h3>
+                <p>Rp 10.000</p>
+                <button class="add-to-cart" onclick="addToCart(this.parentElement)">Tambahkan ke Keranjang</button>
+            </div>
+
+            <!-- Tambahkan item-menu lainnya -->
+        </section>
+
+        <section id="cart-section">
+            <h2>Keranjang Belanja</h2>
+            <ul id="cart-list"></ul>
+            <p id="total">Total: Rp 0</p>
+            <button id="checkout" onclick="checkout()">Checkout</button>
+            <div id="payment-code">
+                <h3>Kode Pembayaran</h3>
+                <p id="code"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 The Joglo's Restaurant. All rights reserved.</p>
+
+        <section id="contact">
+            <h2>Hubungi Kami</h2>
+            <p>Jl. Raya No. 123, Kota Elegan</p>
+            <p>Email: info@restoranjoglo.com</p>
+            <p>Telepon: (123) 456-7890</p>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        const cartItems = [];
+
+        function addToCart(menuItem) {
+            const itemId = menuItem.getAttribute("data-id");
+            const itemName = menuItem.getAttribute("data-name");
+            const itemPrice = parseInt(menuItem.getAttribute("data-price"));
+
+            const existingItem = cartItems.find(item => item.id === itemId);
+
+            if (existingItem) {
+                if (existingItem.quantity < 10) {
+                    existingItem.quantity++;
+                } else {
+                    Swal.fire({
+                        title: 'Stok Habis',
+                        text: 'Maaf, stok maksimal per item adalah 10.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } else {
+                cartItems.push({
+                    id: itemId,
+                    name: itemName,
+                    price: itemPrice,
+                    quantity: 1
+                });
+            }
+
+            updateCart();
+        }
+
+        function updateCart() {
+    const cartList = document.getElementById("cart-list");
+    const totalElement = document.getElementById("total");
+
+    cartList.innerHTML = "";
+
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("cart-item");
+
+        listItem.innerHTML = `
+            <span>${item.name} - Rp ${item.price} x ${item.quantity} </span>
+            <div class="quantity-container">
+                <button class="subtract-button" onclick="subtractItem('${item.id}')">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="add-button" onclick="addItem('${item.id}')">+</button>
+            </div>
+        `;
+
+        cartList.appendChild(listItem);
+
+        total += item.price * item.quantity;
+    });
+
+    totalElement.innerText = `Total: Rp ${total}`;
+}
+
+
+        function subtractItem(itemId) {
+            const itemIndex = cartItems.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                if (cartItems[itemIndex].quantity > 1) {
+                    cartItems[itemIndex].quantity--;
+                } else {
+                    Swal.fire({
+                        title: 'Hapus Item',
+                        text: 'Apakah Anda yakin ingin menghapus item dari keranjang?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya',
+                        cancelButtonText: 'Tidak'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            cartItems.splice(itemIndex, 1);
+                        }
+                    });
+                }
+
+                updateCart();
+            }
+        }
+
+        function addItem(itemId) {
+            const itemIndex = cartItems.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                if (cartItems[itemIndex].quantity < 10) {
+                    cartItems[itemIndex].quantity++;
+                } else {
+                    Swal.fire({
+                        title: 'Stok Habis',
+                        text: 'Maaf, stok maksimal per item adalah 10.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+
+                updateCart();
+            }
+        }
+
+        function checkout() {
+            const paymentCode = generatePaymentCode();
+            displayPaymentCode(paymentCode);
+            resetCart();
+            showCheckoutPopup(paymentCode);
+        }
+
+        function showCheckoutPopup(paymentCode) {
+            Swal.fire({
+                title: 'Checkout Berhasil!',
+                html: `Kode Pembayaran Anda: <strong>${paymentCode}</strong>`,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                showOrderReceivedPopup();
+            });
+        }
+
+        function showOrderReceivedPopup() {
+            Swal.fire({
+                title: 'Pesanan Telah Diterima!',
+                text: 'Terima kasih atas pesanan Anda. Pesanan Anda sedang diproses.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        function generatePaymentCode() {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let code = "";
+
+            for (let i = 0; i < 6; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                code += characters.charAt(randomIndex);
+            }
+
+            return code;
+        }
+
+        function displayPaymentCode(code) {
+            const paymentCodeElement = document.getElementById("code");
+            paymentCodeElement.innerText = code;
+
+            const checkoutButton = document.getElementById("checkout");
+            const checkoutLink = document.getElementById("checkout-link");
+
+            checkoutButton.style.display = "none";
+            paymentCodeElement.style.display = "block";
+            checkoutLink.classList.add("checkout-clicked");
+        }
+
+        function resetCart() {
+            cartItems.length = 0;
+            updateCart();
+        }
+    </script>
+</body>
+
+</html>

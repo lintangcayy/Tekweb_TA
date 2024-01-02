@@ -1,0 +1,78 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style Dasar */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    /*background-image: url('gambar1.jpeg');*/
+    background-color: burlywood;
+}
+
+header, nav, main, footer {
+    margin: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+header {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Navigation Styles */
+nav {
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-item.active {
+    color: #ff6600; 
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+}
+
+#contact {
+    text-align: center;
+}
+
+/* Footer Styles */
+footer {
+    padding: 10px;
+    text-align: center;
+    color: #777;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Tambahkan gaya yang sudah ada di atas */
+
+
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+}
+
